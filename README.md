@@ -190,3 +190,7 @@ Also available in EUR and GBP. [See pricing](https://hjarni.com/#pricing).
 ## Support
 
 Email [evert@hjarni.com](mailto:evert@hjarni.com).
+
+---
+
+[![MCP Badge](https://lobehub.com/badge/mcp/hjarni-hjarni-mcp)](https://lobehub.com/mcp/hjarni-hjarni-mcp)
