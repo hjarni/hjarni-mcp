@@ -61,7 +61,16 @@ Works on any Claude plan. Authenticates via OAuth on first connection.
 
 ### ChatGPT
 
-Available in the ChatGPT MCP app directory (pending approval).
+1. Go to [chatgpt.com > Settings > Connectors](https://chatgpt.com/#settings/Connectors)
+2. Enable **Developer mode**
+3. Tap **Create app**
+4. Set the name to `hjarni` and the MCP Server URL to `https://hjarni.com/mcp`
+5. Set authentication to **OAuth**
+6. Tap **Create** and log in to Hjarni when redirected
+
+<img src="docs/chatgpt-new-app.png" alt="ChatGPT Create App form" width="360" />
+
+> Requires ChatGPT Plus, Pro, or Team plan.
 
 ### Other MCP clients
 
