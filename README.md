@@ -15,6 +15,10 @@
   <a href="https://hjarni.com/blog">Blog</a>
 </p>
 
+<p align="center">
+  <a href="https://lobehub.com/mcp/hjarni-hjarni-mcp"><img src="https://lobehub.com/badge/mcp-full/hjarni" alt="MCP Badge" /></a>
+</p>
+
 ---
 
 ## What it does
