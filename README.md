@@ -17,6 +17,7 @@
 
 <p align="center">
   <a href="https://lobehub.com/mcp/hjarni-hjarni-mcp"><img src="https://lobehub.com/badge/mcp-full/hjarni" alt="MCP Badge" /></a>
+  <a href="https://glama.ai/mcp/servers/hjarni/hjarni-mcp"><img src="https://glama.ai/mcp/servers/hjarni/hjarni-mcp/badges/score.svg" alt="hjarni/hjarni-mcp MCP server" /></a>
 </p>
 
 ---
