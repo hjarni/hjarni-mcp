@@ -17,7 +17,6 @@
 
 <p align="center">
   <a href="https://lobehub.com/mcp/hjarni-hjarni-mcp"><img src="https://lobehub.com/badge/mcp-full/hjarni" alt="MCP Badge" /></a>
-  <a href="https://glama.ai/mcp/servers/hjarni/hjarni-mcp"><img src="https://glama.ai/mcp/servers/hjarni/hjarni-mcp/badges/score.svg" alt="hjarni/hjarni-mcp MCP server" /></a>
 </p>
 
 ---
@@ -199,3 +198,4 @@ Email [evert@hjarni.com](mailto:evert@hjarni.com).
 ---
 
 [![MCP Badge](https://lobehub.com/badge/mcp/hjarni-hjarni-mcp)](https://lobehub.com/mcp/hjarni-hjarni-mcp)
+[![hjarni/hjarni-mcp MCP server](https://glama.ai/mcp/servers/hjarni/hjarni-mcp/badges/score.svg)](https://glama.ai/mcp/connectors/com.hjarni/hjarni)
