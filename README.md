@@ -219,4 +219,4 @@ Email [evert@hjarni.com](mailto:evert@hjarni.com).
 ---
 
 [![MCP Badge](https://lobehub.com/badge/mcp/hjarni-hjarni-mcp)](https://lobehub.com/mcp/hjarni-hjarni-mcp)
-[![hjarni/hjarni-mcp MCP server](https://glama.ai/mcp/servers/hjarni/hjarni-mcp/badges/score.svg)](https://glama.ai/mcp/connectors/com.hjarni/hjarni)
+[![hjarni MCP connector – tool definition quality and endpoint health on Glama](https://glama.ai/mcp/connectors/com.hjarni/hjarni/badges/score.svg)](https://glama.ai/mcp/connectors/com.hjarni/hjarni)
