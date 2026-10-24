@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Give your AI long-term memory.</strong><br>
-  Note-taking app with a built-in MCP server.
+  Note-taking app with an official, hosted MCP server.
 </p>
 
 <p align="center">
@@ -26,6 +26,23 @@ Your notes serve two readers: you and your AI. Hjarni stores the knowledge. Chat
 <p align="center">
   <img src="docs/claude-memory-demo.gif" alt="Claude searching and creating notes in Hjarni" width="600" />
 </p>
+
+## Keep client context between ChatGPT and Claude
+
+Keep each client's preferences, agreed scope, dated decisions, current status, and next action in one project brief. ChatGPT and Claude can read and update that same Markdown note through Hjarni's official, hosted MCP server.
+
+1. Connect both assistants to the same Hjarni account using the [setup guides below](#connect). Start with the [Client Project Context template](https://hjarni.com/templates/client-project-context): it creates a project index and a blank brief to fill with facts you confirm. Keep a separate brief for each client and project.
+2. Before drafting, ask the assistant to find the correct client and project, read the full current brief, and return its source link. If several notes match, have it clarify which one to use.
+3. Draft proposed updates in chat first. After you confirm them, ask the assistant to save only those changes to the same brief, preserving other facts and the dates and reasons behind decisions. Open the note to check the result.
+4. In a fresh chat with the other assistant, explicitly ask it to retrieve that updated brief before continuing the work. Check that it reports the new status and next action alongside the unchanged scope and preferences.
+
+Connecting makes saved notes available; it does not guarantee retrieval or copy every conversation or the assistants' native memories. The [recorded client-context walkthrough](https://hjarni.com/blog/freelancer-client-context-chatgpt-claude) shows both assistants using the same fictional brief, with prompts to repeat the checks.
+
+## Review, recover, and export
+
+[Note history and Trash](https://hjarni.com/docs/note-history) let you inspect saved edits and who made them, compare a previous note body with the current text, and restore an earlier body as a new version. Restoring leaves the current title, folder, and other fields unchanged. Deleted notes remain recoverable in Trash for 30 days. History reviews saved changes; approval before a write depends on the assistant's connection and settings.
+
+[Export and data ownership](https://hjarni.com/docs/export-and-ownership) explains how to download active notes as a Markdown ZIP with folders and attachments, and includes a sample ZIP to inspect without an account. The standard Markdown ZIP excludes archived and trashed notes, revision history, and folder instructions; wiki links and attachment URLs may need updating in another app. Personal notes, individual folders, and teams can be exported separately.
 
 ## Connect
 
