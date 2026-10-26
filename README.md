@@ -5,8 +5,8 @@
 <h1 align="center">Hjarni</h1>
 
 <p align="center">
-  <strong>Give your AI long-term memory.</strong><br>
-  Note-taking app with an official, hosted MCP server.
+  <strong>Markdown notes for you, ChatGPT, and Claude.</strong><br>
+  An official, hosted MCP server for the same notes you read and edit.
 </p>
 
 <p align="center">
@@ -19,9 +19,11 @@
 
 ## What it does
 
-Hjarni is an AI-native note-taking app. Write notes in Markdown, organize them in folders with custom AI instructions per folder, and let Claude or ChatGPT search, read, create, and organize your notes via MCP.
+Hjarni is a Markdown note-taking app with an official, hosted MCP server at `https://hjarni.com/mcp`. Write and edit notes in the browser or Hjarni's iPhone, iPad, Apple Silicon Mac, and Android apps. Connect ChatGPT, Claude, or another compatible MCP client to search, read, create, update, and organize those same saved notes.
 
-Your notes serve two readers: you and your AI. Hjarni stores the knowledge. ChatGPT and Claude are the interfaces.
+Use folders, tags, wiki-links, and instructions to keep a project brief, research notebook, or second brain current across assistants. You can review saved changes in [note history](https://hjarni.com/docs/note-history), restore an earlier body, and [export active notes as Markdown with attachments](https://hjarni.com/docs/export-and-ownership).
+
+Hjarni hosts the server; connecting does not require running a local bridge or Docker container. This repository documents that hosted service. See [client compatibility](https://hjarni.com/compatibility) for setup routes and client-specific limits.
 
 <p align="center">
   <img src="docs/claude-memory-demo.gif" alt="Claude searching and creating notes in Hjarni" width="600" />
@@ -40,13 +42,13 @@ Connecting makes saved notes available; it does not guarantee retrieval or copy 
 
 ## Review, recover, and export
 
-[Note history and Trash](https://hjarni.com/docs/note-history) let you inspect saved edits and who made them, compare a previous note body with the current text, and restore an earlier body as a new version. Restoring leaves the current title, folder, and other fields unchanged. Deleted notes remain recoverable in Trash for 30 days. History reviews saved changes; approval before a write depends on the assistant's connection and settings.
+[Note history and Trash](https://hjarni.com/docs/note-history) let you inspect saved edits and their recorded author or AI client, compare a previous note body with the current text, and restore an earlier body as a new version. Restoring replaces the whole body, including any later edits; the current title, folder, and other fields stay unchanged. Rapid edits by the same author can be grouped into one revision. Deleted notes and folders remain recoverable in Trash for 30 days, subject to account limits. History reviews saved changes; approval before a write depends on the assistant's connection and settings.
 
-[Export and data ownership](https://hjarni.com/docs/export-and-ownership) explains how to download active notes as a Markdown ZIP with folders and attachments, and includes a sample ZIP to inspect without an account. The standard Markdown ZIP excludes archived and trashed notes, revision history, and folder instructions; wiki links and attachment URLs may need updating in another app. Personal notes, individual folders, and teams can be exported separately.
+[Export and data ownership](https://hjarni.com/docs/export-and-ownership) explains how to download active notes as a Markdown ZIP with folders and attachments, and includes a sample ZIP to inspect without an account. Export is an action in Hjarni, not an MCP tool. The standard Markdown ZIP excludes archived and trashed notes, revision history, and folder instructions; wiki links and attachment URLs may need updating in another app. Personal notes, individual folders, and teams can be exported separately.
 
 ## Connect
 
-Hjarni is a hosted remote MCP server with OAuth authentication. No API keys, no Docker, no local setup. Setup takes under 2 minutes.
+The endpoint is `https://hjarni.com/mcp`. Use OAuth sign-in for ChatGPT and Claude; no manually copied API token is needed. For a client that accepts an Authorization header, Hjarni also supports full-access API tokens and restricted [agent tokens](#access-and-agent-tokens).
 
 ### Claude.ai / Claude Desktop / Claude mobile
 
@@ -54,14 +56,11 @@ Hjarni is in the Claude Connectors Directory: [open the listing](https://claude.
 
 Or add it by URL:
 
-1. Open **Customize > Connectors**
-2. Click **+** then **Add custom connector**
-3. Enter the URL `https://hjarni.com/mcp`
-4. Click **Add** and log in to Hjarni when redirected
+1. Open **Customize > Connectors** and add a custom web connector.
+2. Enter the URL `https://hjarni.com/mcp`.
+3. Choose OAuth sign-in, finish adding the connector, and sign in to Hjarni.
 
-<img src="docs/claude-add-connector.png" alt="Claude Add Connector dialog" width="360" />
-
-> Connectors are available on all Claude plans (Free is limited to one). On Team and Enterprise, a workspace owner adds the connector first.
+See the [Hjarni Claude guide](https://hjarni.com/docs/claude) and [Claude's current connector instructions](https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities) for account and workspace requirements. Custom connectors are available on Claude Free, with a limit of one; Team and Enterprise owners manage workspace availability.
 
 ### Claude Code
 
@@ -73,36 +72,45 @@ Add `--scope user` to make it available in every project. Then run `/mcp` inside
 
 ### ChatGPT
 
-Hjarni is in the ChatGPT Apps Directory: [open the app page](https://chatgpt.com/plugins/plugin_asdk_app_69c3058914bc81919b807c176a7c106c), click **Connect**, and sign in.
+Install Hjarni from its [ChatGPT directory page](https://chatgpt.com/plugins/plugin_asdk_app_69c3058914bc81919b807c176a7c106c) and sign in. See the [ChatGPT setup guide](https://hjarni.com/docs/chatgpt) for availability and usage.
 
-Or add it by URL via developer mode:
+If your account permits custom MCP servers, you can also add it by URL:
 
-1. Go to **Settings > Apps > Advanced settings** and enable **Developer mode**
-2. Click **Create app**
-3. Set the MCP Server URL to `https://hjarni.com/mcp` and authentication to **OAuth**
-4. Click **Create** and log in to Hjarni when redirected
+1. Open **Plugins**, select **+**, then **Add custom MCP server**.
+2. Enter a name, the server URL `https://hjarni.com/mcp`, and **OAuth** authentication.
+3. Review the connection details, create and install the plugin, and sign in to Hjarni.
+4. In a new chat, select Hjarni from the `@` menu and ask it to find a saved note.
 
-<img src="docs/chatgpt-new-app.png" alt="ChatGPT Create App form" width="360" />
-
-> Requires a paid ChatGPT plan (Plus, Pro, Business, Enterprise, or Education).
+Custom-server availability and workspace controls are separate from installing the directory entry. Follow [OpenAI's current custom MCP instructions](https://developers.openai.com/api/docs/guides/custom-mcp-server) if the labels in your account differ.
 
 ### Other MCP clients
 
-Any client that supports streamable HTTP transport can connect. The endpoint is `https://hjarni.com/mcp`. Authentication uses OAuth 2.0 with PKCE. Discovery metadata is at `/.well-known/oauth-authorization-server`.
+Clients need Streamable HTTP and a supported authentication method: OAuth 2.0 with PKCE or `Authorization: Bearer YOUR_API_TOKEN`. OAuth discovery is at `https://hjarni.com/.well-known/oauth-authorization-server`; protected resource metadata is at `https://hjarni.com/.well-known/oauth-protected-resource`. Features such as prompts, panels, and events depend on the client.
 
 Setup guides: [Cursor](https://hjarni.com/docs/connect-cursor-mcp) &middot; [Copilot](https://hjarni.com/docs/connect-copilot-mcp) &middot; [Copilot Studio](https://hjarni.com/docs/connect-copilot-studio-mcp) &middot; [Perplexity](https://hjarni.com/docs/connect-perplexity-mcp) &middot; [Raycast](https://hjarni.com/docs/connect-raycast-mcp)
 
+## Access and agent tokens
+
+OAuth sign-in connections use the access of the connected Hjarni account, including its authorized team and shared notes. Naming one folder in a prompt or adding folder instructions does not restrict that connection's access.
+
+For compatible clients such as Claude Code or Cursor, create an [agent token](https://hjarni.com/docs/agent-tokens) in **Settings > Connections** and grant **no access**, **read**, or **write** at a space or folder. Grants inherit down the tree and can be overridden below it; an agent cannot exceed your own access. Each token can have its own instructions and identity in history. Use the token as a Bearer credential instead of the regular OAuth connection.
+
+Restricted tokens see a narrower tool list and cannot use account-wide management tools or the note panel. They still expose a few account-wide details, including your profile, and brain instructions unless disabled for that token; the [agent-token reference](https://hjarni.com/docs/agent-tokens) lists the exact boundaries. [Privacy and permissions](https://hjarni.com/docs/privacy-and-permissions) explains account, team, and connection access.
+
 ## Available tools
+
+The table describes assistant-facing tools. Actual availability depends on the connection's permissions and the client's cached tool list; reconnect or refresh the server in the client after a server update.
 
 | Tool | Description |
 |------|-------------|
-| `me` | The connected user's profile, plan, teams, note quota, and onboarding state |
+| `me` | Connected profile, teams, note quota, and onboarding state; restricted tokens return their grants instead of account-wide quota and onboarding |
 | `dashboard-get` | Overview of the account: counts, recent notes, and recent changes across all spaces |
 | `search` | Full-text search across notes, containers, and tags |
 | `notes-list` | List notes with filtering by container, tags, and sorting |
 | `notes-get` | Read a single note: full body, tags, links, backlinks, files, and inherited AI instructions |
 | `notes-create` | Create a new note with title, body, summary, tags, and container placement |
-| `notes-update` | Update content, move notes, change tags, archive or favorite |
+| `notes-update` | Edit or append content, replace or append a Markdown section, move notes, change tags, archive, favorite, or mark verified |
+| `notes-open` | Open an editable note panel on supported hosts, or return note data on other clients; omit the ID to open a picker |
 | `notes-delete` | Move a note to Trash (recoverable for 30 days) |
 | `notes-restore` | Restore a note from Trash |
 | `notes-history` | Read a note's revision history: who wrote each version, when, and what changed |
@@ -119,21 +127,23 @@ Setup guides: [Cursor](https://hjarni.com/docs/connect-cursor-mcp) &middot; [Cop
 | `tags-manage` | Rename, merge, or delete a tag |
 | `links-manage` | Create or remove bidirectional links between notes |
 | `instructions-get` | Read AI instructions at brain, personal root, container, or team level |
-| `instructions-update` | Update AI instructions at any level (replace or append) |
-| `files-attach` | Attach a file to a note (base64) |
-| `files-attach_from_url` | Fetch a file from a URL and attach it to a note |
-| `files-create_upload_url` | Generate a one-time upload link so the user uploads straight from the browser |
+| `instructions-update` | Replace or append brain, personal-root, personal-folder, or team instructions, subject to access and owner permissions |
+| `files-attach` | Attach a base64 file to a personal note |
+| `files-attach_from_url` | Attach a public URL or native ChatGPT file reference to a personal note |
+| `files-create_upload_url` | Generate a one-time browser upload link for an authorized personal, team, or shared note |
 | `files-check_upload` | Check the status of an upload link |
-| `files-get_download_url` | Get a temporary download URL for a file |
-| `files-remove` | Remove a file attachment |
-| `email-addresses-list` | List email capture addresses (Pro) |
-| `email-addresses-create` | Create an email capture address: mail sent to it becomes a note (Pro) |
+| `files-get_download_url` | Get a temporary, login-free download URL; treat it as a credential while valid |
+| `files-remove` | Permanently remove an attachment from a personal note |
+| `email-addresses-list` | List email capture addresses |
+| `email-addresses-create` | Create an email capture address: mail sent to it becomes a note, subject to account eligibility |
 | `teams-list` | List all teams the user is a member of |
 | `teams-get` | Get team details including recent notes |
 | `teams-create` | Create a new team |
 | `teams-invite` | Invite a teammate by email or get a shareable join link |
 | `feedback-submit` | Send feedback about Hjarni to the maintainers |
 | `nudges-dismiss` | Dismiss a product suggestion the user declined |
+
+For edits, read the current note first and prefer targeted edits over replacing the full body. Pass its `lock_version` as `expected_lock_version` for stale-write checks. This is not a strict lock: a pure `append_body` call skips that check, and a mismatched version is accepted if the note's latest edit is attributed to the connected user and is older than 30 minutes. Check tool results before reporting success: access and limit refusals can return `ok: false` with a `status`, or `error: true` with an error message. See the [tool and permissions reference](https://hjarni.com/docs/mcp#permissions).
 
 ### Built-in prompts
 
@@ -147,7 +157,17 @@ The server also exposes MCP prompts for clients that support prompt discovery:
 
 ### MCP Apps
 
-On hosts that support MCP Apps (the `io.modelcontextprotocol/ui` extension, e.g. Claude and ChatGPT), `files-create_upload_url` renders an inline drop-zone so files upload straight into a note from the chat. Other clients get the plain upload link.
+On hosts that support MCP Apps (the `io.modelcontextprotocol/ui` extension), `files-create_upload_url` can render an inline drop-zone so files upload straight into a note from the chat. Other clients get the plain upload link.
+
+`notes-open` can show a note picker and an editor beside the conversation. In ChatGPT hosts that support Hjarni's panel extensions, the panel also supports note mentions and attaching selected text as context. Availability depends on the host and the published connection's current tool metadata. `notes-panel` and `notes-search_mentions` are app-only tools used by that interface; assistants should read with `notes-get` and edit with `notes-update`.
+
+Clients can also read a saved note as a resource with `resources/read` and a URI such as `hjarni://notes/42`, subject to the same note-access checks. These are saved-note resources, not automatic conversation synchronization.
+
+### Change events
+
+Clients that support the events extension can subscribe to `note.created`, `note.updated`, and `note.deleted` (moved to Trash). Hjarni delivers notifications to a verified webhook callback, with access checked before delivery. Notifications identify the changed note; the client retrieves its content with `notes-get`.
+
+`events/list`, `events/subscribe`, and `events/unsubscribe` are protocol methods, not tools. Delivery is webhook-only; polling and stream delivery are not supported. Events do not by themselves make every connected assistant run in the background. See the [events reference](https://hjarni.com/docs/mcp#events) and [event-triggered workflows](https://hjarni.com/docs/event-triggered-workflows).
 
 ## Usage examples
 
@@ -167,7 +187,7 @@ Claude finds the right container, creates the note with Markdown formatting, add
 
 > "Help me triage my inbox"
 
-Claude lists unfiled notes, suggests where each belongs based on your folder structure, and moves them with your approval.
+Ask Claude to list unfiled notes, suggest where each belongs based on your folder structure, and wait for your approval before moving them.
 
 ### Writing with context
 
@@ -183,12 +203,13 @@ Claude pulls relevant notes and uses them as source material.
 - **Full-text search** across all content
 - **Bidirectional linking** between notes
 - **Tags** for cross-cutting categorization
-- **AI instructions** at brain, folder, and team level
+- **AI instructions** at brain, personal root, folder, team, and individual agent-token level
 - **Note history** with per-revision attribution (you or which AI client) and revert
 - **Trash** with 30-day restore for notes and folders
 - **File attachments** on every plan (unlimited on Pro and Teams)
 - **Email capture**: give a folder its own email address (Pro)
-- **Public sharing**: publish a folder as a read-only page (Pro)
+- **Public sharing**: view-only links for notes and folders on every plan; guest editing requires paid access
+- **Agent tokens** with enforced per-space and per-folder read/write grants
 - **Team collaboration** with shared knowledge bases and per-folder roles
 - **iPhone, iPad, Mac & Android apps**
 - **REST API** for custom integrations
@@ -200,9 +221,9 @@ Claude pulls relevant notes and uses them as source material.
 |---|---|
 | **Endpoint** | `https://hjarni.com/mcp` |
 | **Transport** | Streamable HTTP with JSON-RPC 2.0 |
-| **Protocol versions** | `2025-11-25`, `2025-06-18`, `2025-03-26`, and `2024-11-05` |
-| **Authentication** | OAuth 2.0 (PKCE) or Bearer token |
-| **Capabilities** | Tools, prompts, and UI resources (MCP Apps) |
+| **Protocol versions** | `2025-11-25`, `2025-06-18`, `2025-03-26`, and `2024-11-05` through `initialize`; `2026-07-28` through `server/discover` (see the reference for supported methods) |
+| **Authentication** | OAuth 2.0 (PKCE), full-access API token, or restricted agent token as a Bearer credential |
+| **Capabilities** | Tools, prompts, note and UI resources (MCP Apps), and webhook events |
 
 For the full protocol reference, see the [MCP server docs](https://hjarni.com/docs/mcp).
 
@@ -210,11 +231,11 @@ For the full protocol reference, see the [MCP server docs](https://hjarni.com/do
 
 | Plan | Price | What you get |
 |------|-------|--------------|
-| **Free** | $0 | 25 notes, containers, tags, search, full MCP & API access, 20 MB across 5 file attachments |
+| **Free** | $0 | 25 personal notes, folders, tags, search, MCP & API access, view-only public links, 20 MB across 5 file attachments |
 | **Pro** | $12/mo or $120/yr | Unlimited notes and file attachments, email capture, public sharing, share with 2 collaborators |
 | **Teams** | $20/seat/mo or $200/seat/yr | Shared knowledge base, team MCP & API, member management, per-folder roles |
 
-Also available in EUR and GBP. [See pricing](https://hjarni.com/pricing).
+MCP and API access are included on every plan; account limits, feature eligibility, and permissions still apply. ChatGPT or Claude subscriptions are separate. Prices are also available in EUR and GBP; [see current pricing and limits](https://hjarni.com/pricing).
 
 ## Links
 
